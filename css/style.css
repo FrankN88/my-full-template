@@ -45,12 +45,12 @@
 
   body{
     margin:0;
-    background-color: #009688;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    font-family: "Open Sans", "Roboto";
 }
-*{box-sizing: border-box;}
+/**{box-sizing: border-box;}*/
 
-.quiz-container{
+.game-container{
     max-width: 700px;
     min-height: 500px;
     background-color: white;
@@ -59,8 +59,8 @@
     padding: 30px;
 }
 
-.question-number h3 {
-    color:#009788;
+.ask-number h3 {
+    color: navy;
     border-bottom: 1px solid #ccc;
     margin: 0;
     padding-bottom: 10px;
@@ -139,7 +139,7 @@
 
 .button .btn{
     padding: 10px 30px;
-    background-color: #009688;
+    background-color: navy;
     font-size: 18px;
     color: white;
     border:none;
@@ -147,9 +147,10 @@
     border-radius: 5px;
     display: inline-block;
     margin:10px 0;
+    
 }
 
-.answers-tracker div{
+.answers-result div{
     height: 40px;
     width: 40px;
     background-color: #ccc;
@@ -159,17 +160,15 @@
 }
 
 
-.answers-tracker div.correct{
+.answers-result div.correct{
     background-color: green;
-    background-image:url('img/correct.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 50%;  
 }
 
-.answers-tracker div.wrong{
+.answers-result div.wrong{
     background-color: red;
-    background-image:url('img/wrong.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 50%;
@@ -192,14 +191,14 @@
 }
 
 .quiz-over .box{
-    background-color: #009688;
+    background-color: navy;
     padding:30px;
     border-radius: 10px;
     text-align: center;
     flex-basis: 700px;
     max-width: 700px;
     color: white;
-    box-shadow: #009688;
+    box-shadow: navy;
 }
 
 .quiz-over .box  h1{

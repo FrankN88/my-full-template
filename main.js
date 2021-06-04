@@ -132,18 +132,18 @@ let quiz = {
 };
 window.addEventListener("load", quiz.init); */
 
-const answersTrackerContainer = document.querySelector(".answers-tracker")
+const answersContainer = document.querySelector(".answers-result")
 const options = document.querySelector(".options").children
-const questionNumberSpan = document.querySelector(".question-num-value")
+const questionSpan = document.querySelector(".question-num-value")
 const question=document.querySelector(".question")
-const totalQuestionsSpan =document.querySelector(".total-questions")
+const totalQuestions =document.querySelector(".total-questions")
 const correctAnswersSpan =document.querySelector(".correct-answers")
-const totalQuestionsSpan2 =document.querySelector(".total-questions2")
+const totalQuestions2 =document.querySelector(".total-questions2")
 const percentageSpan =document.querySelector(".percentage")
 
 let currentIndex;
 let index = 0;
-let answeredQuestions =[]; // array of anwered question indexes
+let respondedQuestions =[];
 let score = 0;
 
 const opt1 = document.querySelector(".option1")
@@ -153,7 +153,7 @@ const opt4 = document.querySelector(".option4")
 
 const questions = [
     {
-        q:'What is the approximated measure of the speed of light?"?',
+        q:'What is the approximated measure of the speed of light?',
         options:['300 thousand meters/second', '500 thousand meters/second', '200 thousand meters/second', '250 thousand meters/second'],
         answer:0
     },
@@ -166,13 +166,48 @@ const questions = [
         q:'What is the unit of measure of the magnetic field?',
         options:['G', 'Watt', 'Gauss', 'Candela'],
         answer:2
-    }
+    },
+    {
+      q:'What is the formula of gravity of Earth?',
+      options:['g= 9.81 km s-2', 'g= 18 m s-2', 'g= 9.81 m s-2', 'g= 9.81 m/m s-2'],
+      answer:2
+  },
+  {
+    q:'Which is the seventh planet from the sun?',
+    options:['Uranus', 'Venus', 'Jupiter', 'Pluto'],
+    answer:0
+},
+{
+  q:'What is the formula of speed?',
+  options:['speed = distance ÷ time', 'speed = distance x time', 'speed = 2distance - time', 'speed = distance ÷ time x 24'],
+  answer:0
+},
+{
+  q:'Can sound waves generate heat?',
+  options:['never', 'only during the night', 'yes', 'only during the day'],
+  answer:2
+},
+{
+  q:'What is the absolute 0?',
+  options:['−273.15 °C', '−300 °C', '−300.30 °C', '−250 °C'],
+  answer:0
+},
+{
+  q:'Sodium is a chemical element with atomic number 11. What is its symbol?',
+  options:['Nu', 'Na', 'No', 'Ni'],
+  answer:1
+},
+{
+  q:'The ... Effect makes things traveling long distances around the Earth appear to move at a curve as opposed to a straight line.',
+  options:['Newton', 'Coriolis', 'Bohr', 'Planck'],
+  answer:1
+}
 ]
 
-totalQuestionsSpan.innerHTML = questions.length
+totalQuestions.innerHTML = questions.length
 
 function load(){
-    questionNumberSpan.innerHTML = index + 1
+    questionSpan.innerHTML = index + 1
     question.innerHTML = questions[currentIndex].q;
     opt1.innerHTML = questions[currentIndex].options[0]    
     opt2.innerHTML = questions[currentIndex].options[1]
@@ -181,7 +216,7 @@ function load(){
     index++
 }
 
-//Check if selected answer is correct or wrong
+//Check the answer
 function check(element){
     if(element.id == questions[currentIndex].answer){
         element.className="correct"
@@ -195,7 +230,7 @@ function check(element){
     disableClick();
 }
 
-//Make sure the user selected an item before clicking on the Next button
+//Validate button before passing to next
 function validate(){
     if(!options[0].classList.contains("disabled")){
         alert("Please select an option")
@@ -237,8 +272,8 @@ function randomQuestion(){
         quizOver();
     }
     else{
-        if(answeredQuestions.length > 0){
-            if(answeredQuestions.includes(randomNumber)){
+        if(respondedQuestions.length > 0){
+            if(respondedQuestions.includes(randomNumber)){
                 randomQuestion();
             }
             else {
@@ -246,12 +281,12 @@ function randomQuestion(){
                 load();
             }
         }
-        if(answeredQuestions.length == 0){
+        if(respondedQuestions.length == 0){
             currentIndex = randomNumber
             load()
         }
         //add the question to list of anwered questions
-        answeredQuestions.push(randomNumber)
+        respondedQuestions.push(randomNumber)
     }
 }
 
@@ -265,20 +300,20 @@ window.onload=function(){
 function answersTracker(){
     for(let i=0; i< questions.length; i++){
         const div =document.createElement("div")
-        answersTrackerContainer.appendChild(div);
+        answersContainer.appendChild(div);
     }
 }
 
 //Update the answers tracker elements
 function updateAnswersTracker(newClass){
-    answersTrackerContainer.children[index -1].classList.add(newClass)
+    answersContainer.children[index -1].classList.add(newClass)
 }
 
 //Displays the quiz-over page if quiz is over
 function quizOver(){
     document.querySelector(".quiz-over").classList.add("show")
     correctAnswersSpan.innerHTML = score;
-    totalQuestionsSpan2.innerHTML = questions.length
+    totalQuestions2.innerHTML = questions.length
     percentageSpan.innerHTML=Math.round((score/questions.length)*100) + "%"
 }
 
