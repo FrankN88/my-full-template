@@ -1,322 +1,131 @@
-/*
-let quiz = {
-  data: [
-  {
-    q : "What is the approximated measure of the speed of light?",
-    o : [
-      "500 thousand meters/second",
-      "300 thousand meters/second",
-      "100 thousand meters/second",
-      "400 thousand meters/second"
-    ],
-    a : 1 
-  },
-  {
-    q : "How many elements there are in the periodic table of elements?",
-    o : [
-      "150",
-      "200",
-      "136",
-      "118"
-    ],
-    a : 3
-  },
-  {
-    q : "What is the formula of gravity of Earth?",
-    o : [
-      "g= 35 k s-2",
-      "g= 9.81 m m-2",
-      "g= 9.81 m s-2",
-      "g= 25 m s-2"
-    ],
-    a : 2
-  },
-  {
-    q : "Which is the seventh planet from the sun?",
-    o : [
-      "Uranus",
-      "Earth",
-      "Pluto",
-      "Mars"
-    ],
-    a : 0
-  },
-  {
-    q : "Which is the unit of measure of the magnetic field?",
-    o : [
-      "G",
-      "Watt",
-      "Candela",
-      "Gauss"
-    ],
-    a : 3
-  }
-  ],
 
-  // HTML ELEMENTS
-  hWrap: null, // HTML quiz container
-  hQn: null, // HTML question wrapper
-  hAns: null, // HTML answers wrapper
+/*var input = document.querySelector('.input_text');
+var main = document.querySelector('#name');
+var temp = document.querySelector('.temp');
+var desc = document.querySelector('.desc');
+var clouds = document.querySelector('.clouds');
+var button= document.querySelector('.submit');
 
-  // GAME FLAGS
-  current: 0, // current question
-  result: 0, // result
 
-  // INIT QUIZ HTML
-  init: function(){
-    // (B1) WRAPPER
-    quiz.hWrap = document.getElementById("quizBox");
+button.addEventListener('click', function(name){
+fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+'&appid=87036bfed71d7524c41a4f9923b393b7')
+.then(response => response.json())
+.then(data => {
+  var tempValue = data['main']['temp'];
+  var nameValue = data['name'];
+  var descValue = data['weather'][0]['description'];
 
-    // QUESTIONS SECTION
-    quiz.hQn = document.createElement("div");
-    quiz.hQn.id = "quizQn";
-    quiz.hWrap.appendChild(quiz.hQn);
+  main.innerHTML = nameValue;
+  desc.innerHTML = "Desc - "+descValue;
+  temp.innerHTML = "Temp - "+tempValue;
+  input.value ="";
 
-    // ANSWERS SECTION
-    quiz.hAns = document.createElement("div");
-    quiz.hAns.id = "quizAns";
-    quiz.hWrap.appendChild(quiz.hAns);
+})
 
-    // GO!
-    quiz.draw();
-  },
+.catch(err => alert("Wrong city name!"));
+})*/
 
-  // DRAW QUESTION
-  draw: function(){
-   
-    quiz.hQn.innerHTML = quiz.data[quiz.current].q;
+const timeEl = document.getElementById('time');
+const dateEl = document.getElementById('date');
+const currentWeatherItemsEl = document.getElementById('current-weather-items');
+const timezone = document.getElementById('time-zone');
+const countryEl = document.getElementById('country');
+const weatherForecastEl = document.getElementById('weather-forecast');
+const currentTempEl = document.getElementById('current-temp');
 
-    quiz.hAns.innerHTML = "";
-    for (let i in quiz.data[quiz.current].o) {
-      let radio = document.createElement("input");
-      radio.type = "radio";
-      radio.name = "quiz";
-      radio.id = "quizo" + i;
-      quiz.hAns.appendChild(radio);
-      let label = document.createElement("label");
-      label.innerHTML = quiz.data[quiz.current].o[i];
-      label.setAttribute("for", "quizo" + i);
-      label.dataset.idx = i;
-      label.addEventListener("click", quiz.select);
-      quiz.hAns.appendChild(label);
-    }
-  },
-  
-  // OPTION SELECTED
-  select: function(){
-    // DETACH ALL ONCLICK
-    let all = quiz.hAns.getElementsByTagName("label");
-    for (let label of all) {
-      label.removeEventListener("click", quiz.select);
-    }
 
-    // CHECK IF CORRECT
-    let correct = this.dataset.idx == quiz.data[quiz.current].a;
-    if (correct) { 
-      quiz.result++; 
-      this.classList.add("correct");
-    } else {
-      this.classList.add("wrong");
-    }
-  
-    // NEXT QUESTION OR END GAME
-    quiz.current++;
-    setTimeout(function(){
-      if (quiz.current < quiz.data.length) { quiz.draw(); } 
-      else {
-        quiz.hQn.innerHTML = `You have answered ${quiz.result} of ${quiz.data.length} correctly.`;
-        quiz.hAns.innerHTML = "";
-      }
-    }, 1000);
-  }
-};
-window.addEventListener("load", quiz.init); */
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const answersContainer = document.querySelector(".answers-result")
-const options = document.querySelector(".options").children
-const questionSpan = document.querySelector(".question-num-value")
-const question=document.querySelector(".question")
-const totalQuestions =document.querySelector(".total-questions")
-const correctAnswersSpan =document.querySelector(".correct-answers")
-const totalQuestions2 =document.querySelector(".total-questions2")
-const percentageSpan =document.querySelector(".percentage")
+const API_KEY ='87036bfed71d7524c41a4f9923b393b7';
 
-let currentIndex;
-let index = 0;
-let respondedQuestions =[];
-let score = 0;
+setInterval(() => {
+    const time = new Date();
+    const month = time.getMonth();
+    const date = time.getDate();
+    const day = time.getDay();
+    const hour = time.getHours();
+    const hoursIn12HrFormat = hour >= 13 ? hour %12: hour
+    const minutes = time.getMinutes();
+    const ampm = hour >=12 ? 'PM' : 'AM'
 
-const opt1 = document.querySelector(".option1")
-const opt2 = document.querySelector(".option2")
-const opt3 = document.querySelector(".option3")
-const opt4 = document.querySelector(".option4")
+    timeEl.innerHTML = (hoursIn12HrFormat < 10? '0'+hoursIn12HrFormat : hoursIn12HrFormat) + ':' + (minutes < 10? '0'+minutes: minutes)+ ' ' + `<span id="am-pm">${ampm}</span>`
 
-const questions = [
-    {
-        q:'What is the approximated measure of the speed of light?',
-        options:['300 thousand meters/second', '500 thousand meters/second', '200 thousand meters/second', '250 thousand meters/second'],
-        answer:0
-    },
-    {
-        q:'How many elements there are in the periodic table of elements?',
-        options:['120', '118', '215', '230'],
-        answer:1
-    },
-    {
-        q:'What is the unit of measure of the magnetic field?',
-        options:['G', 'Watt', 'Gauss', 'Candela'],
-        answer:2
-    },
-    {
-      q:'What is the formula of gravity of Earth?',
-      options:['g= 9.81 km s-2', 'g= 18 m s-2', 'g= 9.81 m s-2', 'g= 9.81 m/m s-2'],
-      answer:2
-  },
-  {
-    q:'Which is the seventh planet from the sun?',
-    options:['Uranus', 'Venus', 'Jupiter', 'Pluto'],
-    answer:0
-},
-{
-  q:'What is the formula of speed?',
-  options:['speed = distance ÷ time', 'speed = distance x time', 'speed = 2distance - time', 'speed = distance ÷ time x 24'],
-  answer:0
-},
-{
-  q:'Can sound waves generate heat?',
-  options:['never', 'only during the night', 'yes', 'only during the day'],
-  answer:2
-},
-{
-  q:'What is the absolute 0?',
-  options:['−273.15 °C', '−300 °C', '−300.30 °C', '−250 °C'],
-  answer:0
-},
-{
-  q:'Sodium is a chemical element with atomic number 11. What is its symbol?',
-  options:['Nu', 'Na', 'No', 'Ni'],
-  answer:1
-},
-{
-  q:'The ... Effect makes things traveling long distances around the Earth appear to move at a curve as opposed to a straight line.',
-  options:['Newton', 'Coriolis', 'Bohr', 'Planck'],
-  answer:1
-}
-]
+    dateEl.innerHTML = days[day] + ', ' + date+ ' ' + months[month]
 
-totalQuestions.innerHTML = questions.length
+}, 1000);
 
-function load(){
-    questionSpan.innerHTML = index + 1
-    question.innerHTML = questions[currentIndex].q;
-    opt1.innerHTML = questions[currentIndex].options[0]    
-    opt2.innerHTML = questions[currentIndex].options[1]
-    opt3.innerHTML = questions[currentIndex].options[2]
-    opt4.innerHTML = questions[currentIndex].options[3]
-    index++
+getWeatherData()
+function getWeatherData () {
+    navigator.geolocation.getCurrentPosition((success) => {
+        
+        let {latitude, longitude } = success.coords;
+
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data => {
+
+        console.log(data)
+        showWeatherData(data);
+        })
+
+    })
 }
 
-//Check the answer
-function check(element){
-    if(element.id == questions[currentIndex].answer){
-        element.className="correct"
-        updateAnswersTracker("correct")
-        score++
-    }
-    else {
-        element.className="wrong"
-        updateAnswersTracker("wrong")
-    }
-    disableClick();
-}
+function showWeatherData (data){
+    let {humidity, pressure, sunrise, sunset, wind_speed} = data.current;
 
-//Validate button before passing to next
-function validate(){
-    if(!options[0].classList.contains("disabled")){
-        alert("Please select an option")
-    }
-    else{
-        randomQuestion();
-        enableClick();
-    }
-}
+    timezone.innerHTML = data.timezone;
+    countryEl.innerHTML = data.lat + 'N ' + data.lon+'E'
 
-//Listener function for click event on Next button
-function next(){
-    validate();
-}
+    currentWeatherItemsEl.innerHTML = 
+    `<div class="weather-item">
+        <div>Humidity</div>
+        <div>${humidity}%</div>
+    </div>
+    <div class="weather-item">
+        <div>Pressure</div>
+        <div>${pressure}</div>
+    </div>
+    <div class="weather-item">
+        <div>Wind Speed</div>
+        <div>${wind_speed}</div>
+    </div>
+    <div class="weather-item">
+        <div>Sunrise</div>
+        <div>${window.moment(sunrise * 1000).format('HH:mm a')}</div>
+    </div>
+    <div class="weather-item">
+        <div>Sunset</div>
+        <div>${window.moment(sunset*1000).format('HH:mm a')}</div>
+    </div>
+    
+    
+    `;
 
-//Function to disable click for the options
-function disableClick(){
-    for(let i=0; i<options.length; i++){
-        options[i].classList.add("disabled")
-
-        if(options[i].id == questions[currentIndex].answer){
-            options[i].classList.add('correct');
+    let otherDayForcast = ''
+    data.daily.forEach((day, idx) => {
+        if(idx == 0){
+            currentTempEl.innerHTML = `
+            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
+            <div class="other">
+                <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+                <div class="temp">Night - ${day.temp.night}&#176;C</div>
+                <div class="temp">Day - ${day.temp.day}&#176;C</div>
+            </div>
+            
+            `
+        }else{
+            otherDayForcast += `
+            <div class="weather-forecast-item">
+                <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
+                <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
+                <div class="temp">Night - ${day.temp.night}&#176;C</div>
+                <div class="temp">Day - ${day.temp.day}&#176;C</div>
+            </div>
+            
+            `
         }
-    }
-}
+    })
 
-//Function to reanable click in the options
-function enableClick(){
-    for(let i=0; i<options.length; i++){
-        options[i].classList.remove("disabled", "correct", "wrong")
 
-    }
-}
-
-//Function to select a random question
-function randomQuestion(){
-    let randomNumber = Math.floor(Math.random()*questions.length);
-    if(index == questions.length){
-        quizOver();
-    }
-    else{
-        if(respondedQuestions.length > 0){
-            if(respondedQuestions.includes(randomNumber)){
-                randomQuestion();
-            }
-            else {
-                currentIndex = randomNumber;
-                load();
-            }
-        }
-        if(respondedQuestions.length == 0){
-            currentIndex = randomNumber
-            load()
-        }
-        //add the question to list of anwered questions
-        respondedQuestions.push(randomNumber)
-    }
-}
-
-//Restart the quiz
-window.onload=function(){
-    this.randomQuestion();
-    this.answersTracker();
-}
-
-//Set up answers tracker elements
-function answersTracker(){
-    for(let i=0; i< questions.length; i++){
-        const div =document.createElement("div")
-        answersContainer.appendChild(div);
-    }
-}
-
-//Update the answers tracker elements
-function updateAnswersTracker(newClass){
-    answersContainer.children[index -1].classList.add(newClass)
-}
-
-//Displays the quiz-over page if quiz is over
-function quizOver(){
-    document.querySelector(".quiz-over").classList.add("show")
-    correctAnswersSpan.innerHTML = score;
-    totalQuestions2.innerHTML = questions.length
-    percentageSpan.innerHTML=Math.round((score/questions.length)*100) + "%"
-}
-
-function tryAgain(){
-    window.location.reload();
+    weatherForecastEl.innerHTML = otherDayForcast;
 }

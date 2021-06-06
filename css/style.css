@@ -1,217 +1,258 @@
+/**{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* #quizBox {
-    max-width: 600px;
-    margin: 0 auto;
-  }
+body{
+  font-family: "Nunito",sans-serif;
+  background: #f8f8f8;
+}
 
-  #quizQn {
-    padding: 20px;
-    background: #D19d00;
-    color: black;
-    font-size: 24px;
-    border-radius: 10px;
-  }
-  
+.input{
+  text-align: center;
+  margin: 100px auto;
+}
 
-  #quizAns {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 10px;
-  }
-  #quizAns input[type=radio] { display: none; }
-  #quizAns label {
-    background: #fafafa;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    text-align: center;
-  }
-  #quizAns label.correct {
-    background: #d8ffc4;
-    border: 1px solid #60a03f;
-  }
-  #quizAns label.wrong {
-    background: #ffe8e8;
-    border: 1px solid #c78181;
-  }
-  
-  html, body {
-    background: #f5f5f5;; 
-    font-family: "open sans", "roboto";
-  } */
+input[type="submit"]{
+  padding: 15px 30px;
+  background: #e7e7e7;
+  border: none;
+  border-radius: 1px;
+  font-family: "Nunito",sans-serif;
+  font-weight:bold;
+  font-size: 20px;
+}
 
-  body{
+.input input[type="text"]{
+  width: 600px;
+  height: 55px;
+  padding: 5px 10px;
+  background: #e7e7e7;
+  border: none;
+  border-radius: 1px;
+  font-family: "Nunito",sans-serif;
+  font-weight:bold;
+  font-size: 20px;
+}
+
+.card{
+  width: 50%;
+  background: #e7e7e7;
+  height: 40vh;
+  margin: 50px auto;
+  border-radius: 2px;
+}
+
+
+.close{
+  float: right;
+  margin-top: -2px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.card h1{
+  padding: 5px 0;
+  text-align: center;
+}
+
+.card p{
+  text-align: center;
+  margin:40px 0;
+  font-size:20px;
+}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap');
+
+*{
+    box-sizing: border-box;
     margin:0;
-    background-color: #f5f5f5;
-    font-family: "Open Sans", "Roboto";
-}
-/**{box-sizing: border-box;}*/
-
-.game-container{
-    max-width: 700px;
-    min-height: 500px;
-    background-color: white;
-    margin: 30px auto;
-    border-radius: 8px;
-    padding: 30px;
+    padding:0;
 }
 
-.ask-number h3 {
-    color: navy;
-    border-bottom: 1px solid #ccc;
-    margin: 0;
-    padding-bottom: 10px;
-}
-
-
-.question{
-    font-size: 24px;
-    color: black;
-    padding:15px 0;
-    margin-bottom: 20px;
-}
-
-.options div{
-    background-color: #ccc;
-    font-size: 16px;
-    color: black;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    padding:15px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.options div.disabled{
-    pointer-events: none;
-}
-
-.options div.correct{
-    z-index: 1;
-    color: white;
-}
-
-.options div.correct::before {
-    content:'';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color:green;
-    z-index: -1;
-
-    animation: animateBackground 1s ease;
-    animation-fill-mode: forwards;
-}
-
-@keyframes animateBackground{
-    0%{
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
-}
-
-.options div.wrong{
-    z-index: 1;
-    color: white;
-}
-
-.options div.wrong::before {
-    content:'';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color:red;
-    z-index: -1;
-
-    animation: animateBackground 1s ease;
-    animation-fill-mode: forwards;
-}
-
-.button .btn{
-    padding: 10px 30px;
-    background-color: navy;
-    font-size: 18px;
-    color: white;
-    border:none;
-    cursor:pointer;
-    border-radius: 5px;
-    display: inline-block;
-    margin:10px 0;
-    
-}
-
-.answers-result div{
-    height: 40px;
-    width: 40px;
-    background-color: #ccc;
-    display: inline-block;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-
-.answers-result div.correct{
-    background-color: green;
-    background-position: center;
+body{
+    background:url('https://images.unsplash.com/photo-1621274403997-37aace184f49?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1');
     background-repeat: no-repeat;
-    background-size: 50%;  
+    background-size:cover;
+    overflow:hidden;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
-.answers-result div.wrong{
-    background-color: red;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 50%;
+.container{
+    padding: 20px 70px;
+    color:#fff;
 }
 
-.quiz-over{
+.current-info{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.date-container{
+    font-weight: 100;
+}
+.date-container .time{
+    font-size: 70px;
+}
+
+.date-container #am-pm{
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.date-container .date{
+    font-size: 30px;
+}
+
+.place-container{
+    text-align: end;
+}
+
+.place-container .time-zone{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.place-container .country{
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.current-info .others{
+    display: flex;
+    flex-direction: column;
+    background: rgba(24,24,27, 0.6);
+    padding:20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+}
+
+.current-info .others .weather-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.future-forecast{
+    background: rgba(24,24,27,0.8);
+    padding: 25px;
     position: fixed;
-    left: 0px;
-    top: 0px;
+    bottom: 0;
+    display: flex;
+    color:white;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 10;
-    display:none;
     align-items: center;
     justify-content: center;
-}
-.show{
-    display:flex;
+    overflow-y: hidden;
 }
 
-.quiz-over .box{
-    background-color: navy;
-    padding:30px;
+.future-forecast .today{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee;
     border-radius: 10px;
+    padding:15px;
+    padding-right: 40px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2)
+}
+
+.future-forecast .today .day{
+    padding: 5px 15px;
+    background: #3c3c44;
+    border-radius: 50px;
     text-align: center;
-    flex-basis: 700px;
-    max-width: 700px;
-    color: white;
-    box-shadow: navy;
 }
 
-.quiz-over .box  h1{
-    font-size: 36px;
-    margin:0 0 20px
+.future-forecast .today .temp{
+    font-size: 18px;
+    padding-top: 15px;
 }
 
-.quiz-over .box button{
-    padding: 15px 50px;
-    border:none;
-    background-color: #f7b53c;
-    border-radius: 5px;
-    font-size: 16px;
-    margin:15px 0 20px;
-    color: white;
+.future-forecast .weather-forecast{
+    display: flex;
+}
+
+.weather-forecast .weather-forecast-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2)
+}
+
+.weather-forecast .weather-forecast-item .day{
+    padding: 5px 15px;
+    background: #3C3C44;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.weather-forecast .weather-forecast-item .temp{
+    font-weight: 100;
+    font-size: 12px;
+}
+
+
+@media only screen and  (max-width:730px){
+    
+    .container{
+        padding: 20px;
+    }
+    
+    .future-forecast{
+        justify-content: start;
+        align-items: none;
+        overflow-y: scroll;
+    }
+
+    .future-forecast .today .temp{
+        font-size: 16px;
+    }
+
+    .date-container .time{
+        font-size: 50px;
+    }
+
+    .date-container #am-pm{
+        font-size: 20px;
+    }
+
+    .date-container .date{
+        font-size: 20px;
+    }
+
+    .place-container{
+        text-align: end;
+        margin-top: 15px;
+    }
+
+    .place-container .time-zone{
+        font-size: 20px;
+    }
+
+    .current-info .others{
+        padding: 12px;
+    }
+
+    .current-info .others .weather-item{
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (max-width: 1400px){
+    .future-forecast{
+        justify-content: start;
+        align-items: none;
+        overflow-x: scroll;
+    }
 }
