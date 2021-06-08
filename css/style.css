@@ -84,6 +84,11 @@ body{
     color:#fff;
 }
 
+.w-icon {
+    width: 30%;
+    height: 30%;
+}
+
 .current-info{
     display: flex;
     justify-content: space-between;
@@ -119,20 +124,7 @@ body{
     font-weight: 700;
 }
 
-.current-info .others{
-    display: flex;
-    flex-direction: column;
-    background: rgba(24,24,27, 0.6);
-    padding:20px;
-    border-radius: 10px;
-    margin: 10px 0;
-    border: 1px solid #eee;
-}
 
-.current-info .others .weather-item{
-    display: flex;
-    justify-content: space-between;
-}
 
 
 .future-forecast{
@@ -236,14 +228,6 @@ body{
 
     .place-container .time-zone{
         font-size: 20px;
-    }
-
-    .current-info .others{
-        padding: 12px;
-    }
-
-    .current-info .others .weather-item{
-        font-size: 14px;
     }
 
 }
